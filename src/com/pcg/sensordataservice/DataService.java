@@ -1,7 +1,6 @@
 package com.pcg.sensordataservice;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -15,18 +14,21 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 public class DataService extends Service implements SensorEventListener {
 	
+	private DataService service = this;
 	private SensorManager sensorManager;
-	private Sensor accelerometer;
+	private Sensor sensor;
+	
+	private MyBinder binder = new MyBinder();
 	
 	private final String pathName = "/sdcard/SensorData/";
 	private String fileName = "";
-	
 	private File file, path;
 	private FileOutputStream fos;
 	
@@ -34,13 +36,8 @@ public class DataService extends Service implements SensorEventListener {
 	public void onCreate() {
 		Log.d("Func", "onCreate()");
 		super.onCreate();
-		
 		sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
-		accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-		sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
-		
 		try {
-			
 			SimpleDateFormat format = new SimpleDateFormat("MM.dd HH_mm_ss");
 			fileName =format.format(new Date()) + ".txt";
 			path = new File(pathName);
@@ -91,6 +88,9 @@ public class DataService extends Service implements SensorEventListener {
 		case Sensor.TYPE_ACCELEROMETER:
 			s = "TYPE_ACCELEROMETER";
 			break;
+		case Sensor.TYPE_GYROSCOPE:
+			s = "TYPE_GYROSCOPE";
+			break;
 		}
 		s += " " + Long.toString(event.timestamp);
 		s += " " + Integer.toString(event.accuracy);
@@ -108,14 +108,34 @@ public class DataService extends Service implements SensorEventListener {
 	@Nullable
 	@Override
 	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
-		return null;
+		Log.d("Func", "onBind()");
+		return binder;
 	}
 
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	class MyBinder extends Binder {
+		public void setSensors(boolean[] switches) {
+			Log.d("Func", "setSensors()");
+			for (int i=0; i<switches.length; ++i) 
+				if (switches[i]) {
+				switch(i) {
+				case 0:
+					sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+					break;
+				case 1:
+					sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+					break;
+				default:
+					break;
+				}
+				sensorManager.registerListener(service, sensor, SensorManager.SENSOR_DELAY_GAME);
+			}
+		}
 	}
 
 }

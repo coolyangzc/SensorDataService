@@ -22,4 +22,23 @@
         android:layout_marginTop="16dp"
         android:text="停止服务" />
 
+    <Button
+        android:id="@+id/Button0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/stopService"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="加速计：开" />
+
+    <Button
+        android:id="@+id/Button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/Button0"
+        android:layout_marginRight="16dp"
+        android:text="陀螺仪：开" />
+
 </RelativeLayout>
