@@ -25,6 +25,7 @@ public class DataService extends Service implements SensorEventListener {
 	private Sensor accelerometer;
 	
 	private final String pathName = "/sdcard/SensorData/";
+	private String fileName = "";
 	
 	private File file, path;
 	private FileOutputStream fos;
@@ -34,16 +35,6 @@ public class DataService extends Service implements SensorEventListener {
 		Log.d("Func", "onCreate()");
 		super.onCreate();
 		
-		Intent notificationIntent = new Intent(this, MainActivity.class);
-		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-		Notification.Builder builder = new Notification.Builder(this);
-		builder.setContentTitle("SensorDataService");
-		builder.setContentText("Running...");
-		builder.setSmallIcon(R.drawable.ic_launcher);
-		builder.setContentIntent(pendingIntent);
-		Notification notification = builder.build();
-		startForeground(1, notification);
-		
 		sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
 		accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
@@ -51,9 +42,9 @@ public class DataService extends Service implements SensorEventListener {
 		try {
 			
 			SimpleDateFormat format = new SimpleDateFormat("MM.dd HH_mm_ss");
-			
+			fileName =format.format(new Date()) + ".txt";
 			path = new File(pathName);
-			file = new File(pathName + format.format(new Date()) + ".txt");
+			file = new File(pathName + fileName);
 			Log.d("File", pathName + format.format(new Date()) + ".txt");
 			if (!path.exists())
 				path.mkdir();
@@ -63,6 +54,16 @@ public class DataService extends Service implements SensorEventListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		Intent notificationIntent = new Intent(this, MainActivity.class);
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+		Notification.Builder builder = new Notification.Builder(this);
+		builder.setContentTitle("SensorDataService");
+		builder.setContentText("Recording " + pathName + fileName + "...");
+		builder.setSmallIcon(R.drawable.ic_launcher);
+		builder.setContentIntent(pendingIntent);
+		Notification notification = builder.build();
+		startForeground(1, notification);
 		
 	}
 	
