@@ -8,8 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends Activity implements View.OnClickListener{
 	
-	private Button startService;
-	private Button stopService;
+	private Button startService, stopService;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
