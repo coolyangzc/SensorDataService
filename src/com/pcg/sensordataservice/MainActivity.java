@@ -13,9 +13,9 @@ import android.widget.Button;
 public class MainActivity extends Activity implements View.OnClickListener{
 	
 	private Button startService, stopService;
-	private Button[] buttons = new Button[2];
+	private Button[] buttons = new Button[4];
 	
-	private boolean[] switches = new boolean[2];
+	private boolean[] switches = new boolean[4];
 	private DataService.MyBinder binder;
 	
 	@Override
@@ -27,6 +27,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		stopService = (Button) findViewById(R.id.stopService);
 		buttons[0] = (Button) findViewById(R.id.Button0);
 		buttons[1] = (Button) findViewById(R.id.Button1);
+		buttons[2] = (Button) findViewById(R.id.Button2);
+		buttons[3] = (Button) findViewById(R.id.Button3);
 		
 		startService.setOnClickListener(this);
 		stopService.setOnClickListener(this);
@@ -80,7 +82,18 @@ public class MainActivity extends Activity implements View.OnClickListener{
 				buttons[1].setText("陀螺仪：开");
 			else
 				buttons[1].setText("陀螺仪：关");
-
+		case R.id.Button2:
+			switches[2] ^= true;
+			if (switches[2])
+				buttons[2].setText("磁场：开");
+			else
+				buttons[2].setText("磁场：关");
+		case R.id.Button3:
+			switches[3] ^= true;
+			if (switches[3])
+				buttons[3].setText("重力：开");
+			else
+				buttons[3].setText("重力：关");
 		default:
 			break;
 		}

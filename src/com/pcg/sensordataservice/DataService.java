@@ -86,10 +86,16 @@ public class DataService extends Service implements SensorEventListener {
 		String s = "";
 		switch (event.sensor.getType()) {
 		case Sensor.TYPE_ACCELEROMETER:
-			s = "TYPE_ACCELEROMETER";
+			s = "0";
 			break;
 		case Sensor.TYPE_GYROSCOPE:
-			s = "TYPE_GYROSCOPE";
+			s = "1";
+			break;
+		case Sensor.TYPE_MAGNETIC_FIELD:
+			s = "2";
+			break;
+		case Sensor.TYPE_GRAVITY:
+			s = "3";
 			break;
 		}
 		s += " " + Long.toString(event.timestamp);
@@ -129,6 +135,12 @@ public class DataService extends Service implements SensorEventListener {
 					break;
 				case 1:
 					sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+					break;
+				case 2:
+					sensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+					break;
+				case 3:
+					sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
 					break;
 				default:
 					break;

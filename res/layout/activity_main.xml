@@ -41,4 +41,22 @@
         android:layout_marginRight="16dp"
         android:text="陀螺仪：开" />
 
+    <Button
+        android:id="@+id/Button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Button0"
+        android:layout_alignRight="@+id/Button0"
+        android:layout_centerVertical="true"
+        android:text="磁场：开" />
+
+    <Button
+        android:id="@+id/Button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Button1"
+        android:layout_alignRight="@+id/Button1"
+        android:layout_centerVertical="true"
+        android:text="重力：开" />
+
 </RelativeLayout>
