@@ -111,11 +111,16 @@ public class DataService extends Service implements SensorEventListener {
 		}
 	}
 	
-	@Nullable
 	@Override
 	public IBinder onBind(Intent intent) {
 		Log.d("Func", "onBind()");
 		return binder;
+	}
+	
+	@Override
+	public boolean onUnbind(Intent intent) {
+		Log.d("Func", "onUnbind()");
+		return super.onUnbind(intent);
 	}
 
 	@Override

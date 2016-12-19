@@ -48,7 +48,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
-			Log.d("Func", "onServiceConnected");
+			Log.d("Func", "onServiceConnected()");
 			binder = (DataService.MyBinder) service;
 			binder.setSensors(switches);
 		}
@@ -65,7 +65,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			
 			break;
 		case R.id.stopService:
-			unbindService(connection);
+			try {
+				unbindService(connection);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			Intent stopIntent = new Intent(this, DataService.class);
 			stopService(stopIntent);
 			break;
