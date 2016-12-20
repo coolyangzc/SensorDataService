@@ -3,6 +3,7 @@ package com.pcg.sensordataservice;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -27,6 +28,8 @@ public class DataService extends Service implements SensorEventListener {
 	
 	private MyBinder binder = new MyBinder();
 	
+	private Long startTime;
+	
 	private final String pathName = "/sdcard/SensorData/";
 	private String fileName = "";
 	private File file, path;
@@ -48,6 +51,9 @@ public class DataService extends Service implements SensorEventListener {
 			if (!file.exists())
 				file.createNewFile();
 				fos = new FileOutputStream(file);
+				startTime = System.currentTimeMillis();
+				String s = Long.toString(startTime) + "\n";
+				fos.write(s.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -98,7 +104,7 @@ public class DataService extends Service implements SensorEventListener {
 			s = "3";
 			break;
 		}
-		s += " " + Long.toString(event.timestamp);
+		s += " " + Long.toString(event.timestamp / 1000000 - startTime);
 		s += " " + Integer.toString(event.accuracy);
 		for (int i=0; i < event.values.length; ++i)	
 			s += " " + Float.toString(event.values[i]);

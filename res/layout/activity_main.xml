@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/Button0"
         android:layout_alignRight="@+id/Button0"
+        android:layout_marginTop="16dp"
         android:layout_centerVertical="true"
         android:text="磁场：开" />
 
