@@ -36,15 +36,15 @@
 * 第一列表示传感器类型
 	* 0: TYPE_ACCELEROMETER
 	* 1: TYPE_GYROSCOPE
-	* 2: TYPE_MAGNETIC_FIELD
+	* 2: TYPE\_MAGNETIC\_FIELD
 	* 3: TYPE_GRAVITY
 	* 待添加，如有需求请提出
 * 第二列为该条数据距数据开始收集的时间，单位`ms`（不同传感器间不保证时间序）。
 * 第三列为该`Sensorevent`的`accuracy`
-* 第四列为该`Sensorevent`的`values`，含义见`http://www.android-doc.com/reference/android/hardware/SensorEvent.html#values`
+* 第四之后的列为该`Sensorevent`的`values`，含义见`http://www.android-doc.com/reference/android/hardware/SensorEvent.html#values`
 
 ## 文件大小 ##
 
 采集频率为`SensorManager.SENSOR_DELAY_FASTEST`。
 
-以`小V`手机为例，加速计和陀螺仪每秒各采集约100条数据，持续运行1小时的文件大小约为30Mb。
+以`小V`手机为例，加速计和陀螺仪每秒各采集约100条数据，持续运行1小时的文件大小约为`30MB`。
