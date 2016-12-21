@@ -7,17 +7,22 @@ import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Binder;
+import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 public class DataService extends Service implements SensorEventListener {
@@ -30,15 +35,19 @@ public class DataService extends Service implements SensorEventListener {
 	
 	private Long startTimestamp = 0L;
 	
-	private final String pathName = "/sdcard/SensorData/";
+	private final String pathName = Environment.getExternalStorageDirectory().getPath() + "/SensorData/";
 	private String fileName = "";
 	private File file, path;
 	private FileOutputStream fos;
+	
+	
 	
 	@Override
 	public void onCreate() {
 		Log.d("Func", "onCreate()");
 		super.onCreate();
+		
+		
 		sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("MM.dd HH_mm_ss");
@@ -68,6 +77,8 @@ public class DataService extends Service implements SensorEventListener {
 		startForeground(1, notification);
 		
 	}
+	
+	
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -133,7 +144,7 @@ public class DataService extends Service implements SensorEventListener {
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	
 	class MyBinder extends Binder {
@@ -159,6 +170,7 @@ public class DataService extends Service implements SensorEventListener {
 				}
 				sensorManager.registerListener(service, sensor, SensorManager.SENSOR_DELAY_GAME);
 			}
+			Log.d("Func", "setSensors() Finish");
 		}
 	}
 

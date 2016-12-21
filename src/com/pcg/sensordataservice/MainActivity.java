@@ -1,11 +1,14 @@
 package com.pcg.sensordataservice;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,10 +21,18 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	private boolean[] switches = new boolean[4];
 	private DataService.MyBinder binder;
 	
+	private static final int REQUEST_EXTERNAL_STORAGE = 1;
+	private static String[] PERMISSIONS_STORAGE = {
+	        Manifest.permission.READ_EXTERNAL_STORAGE,
+	        Manifest.permission.WRITE_EXTERNAL_STORAGE
+	};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		verifyStoragePermissions(this);
 		
 		startService = (Button) findViewById(R.id.startService);
 		stopService = (Button) findViewById(R.id.stopService);
@@ -37,6 +48,20 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			buttons[i].setOnClickListener(this);
 		}
 	}
+	
+	public static void verifyStoragePermissions(Activity activity) {
+		
+		int permission = ActivityCompat.checkSelfPermission(activity, 
+				Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+	    if (permission != PackageManager.PERMISSION_GRANTED) {
+			// We don't have permission so prompt the user
+			ActivityCompat.requestPermissions(
+					activity, 
+					PERMISSIONS_STORAGE, 
+					REQUEST_EXTERNAL_STORAGE);
+			}
+		}
 	
 	private ServiceConnection connection = new ServiceConnection() {
 		
@@ -86,18 +111,21 @@ public class MainActivity extends Activity implements View.OnClickListener{
 				buttons[1].setText("陀螺仪：开");
 			else
 				buttons[1].setText("陀螺仪：关");
+			break;
 		case R.id.Button2:
 			switches[2] ^= true;
 			if (switches[2])
 				buttons[2].setText("磁场：开");
 			else
 				buttons[2].setText("磁场：关");
+			break;
 		case R.id.Button3:
 			switches[3] ^= true;
 			if (switches[3])
 				buttons[3].setText("重力：开");
 			else
 				buttons[3].setText("重力：关");
+			break;
 		default:
 			break;
 		}
