@@ -40,13 +40,10 @@ public class DataService extends Service implements SensorEventListener {
 	private File file, path;
 	private FileOutputStream fos;
 	
-	
-	
 	@Override
 	public void onCreate() {
 		Log.d("Func", "onCreate()");
 		super.onCreate();
-		
 		
 		sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
 		try {
@@ -75,10 +72,7 @@ public class DataService extends Service implements SensorEventListener {
 		builder.setContentIntent(pendingIntent);
 		Notification notification = builder.build();
 		startForeground(1, notification);
-		
 	}
-	
-	
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -168,7 +162,7 @@ public class DataService extends Service implements SensorEventListener {
 				default:
 					break;
 				}
-				sensorManager.registerListener(service, sensor, SensorManager.SENSOR_DELAY_GAME);
+				sensorManager.registerListener(service, sensor, SensorManager.SENSOR_DELAY_FASTEST);
 			}
 			Log.d("Func", "setSensors() Finish");
 		}
