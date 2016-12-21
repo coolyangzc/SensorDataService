@@ -28,7 +28,7 @@ public class DataService extends Service implements SensorEventListener {
 	
 	private MyBinder binder = new MyBinder();
 	
-	private Long startTime;
+	private Long startTimestamp = 0L;
 	
 	private final String pathName = "/sdcard/SensorData/";
 	private String fileName = "";
@@ -51,8 +51,7 @@ public class DataService extends Service implements SensorEventListener {
 			if (!file.exists())
 				file.createNewFile();
 				fos = new FileOutputStream(file);
-				startTime = System.currentTimeMillis();
-				String s = Long.toString(startTime) + "\n";
+				String s = Long.toString(System.currentTimeMillis()) + "\n";
 				fos.write(s.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -104,7 +103,9 @@ public class DataService extends Service implements SensorEventListener {
 			s = "3";
 			break;
 		}
-		s += " " + Long.toString(event.timestamp / 1000000 - startTime);
+		if (startTimestamp == 0)
+			startTimestamp = event.timestamp;
+		s += " " + Long.toString((event.timestamp - startTimestamp) / 1000000);
 		s += " " + Integer.toString(event.accuracy);
 		for (int i=0; i < event.values.length; ++i)	
 			s += " " + Float.toString(event.values[i]);
