@@ -38,6 +38,8 @@
 	* 1: TYPE_GYROSCOPE
 	* 2: TYPE\_MAGNETIC\_FIELD
 	* 3: TYPE_GRAVITY
+	* 4: TYPE_PROXIMITY
+	* 5: TYPE_LIGHT
 	* 待添加，如有需求请提出
 * 第二列为该条数据距数据开始收集的时间，单位`ms`（不同传感器间不保证时间序）。
 * 第三列为该`Sensorevent`的`accuracy`
