@@ -17,6 +17,7 @@ import android.hardware.SensorManager;
 import android.os.Binder;
 import android.os.Environment;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.util.Log;
 
 public class DataService extends Service implements SensorEventListener {
@@ -52,6 +53,7 @@ public class DataService extends Service implements SensorEventListener {
 				file.createNewFile();
 				fos = new FileOutputStream(file);
 				String s = Long.toString(System.currentTimeMillis()) + "\n";
+				s += Long.toString(SystemClock.elapsedRealtimeNanos()) + "\n";
 				fos.write(s.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
