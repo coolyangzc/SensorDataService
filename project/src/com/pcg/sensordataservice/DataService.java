@@ -3,17 +3,13 @@ package com.pcg.sensordataservice;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -21,8 +17,6 @@ import android.hardware.SensorManager;
 import android.os.Binder;
 import android.os.Environment;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 public class DataService extends Service implements SensorEventListener {
@@ -107,6 +101,14 @@ public class DataService extends Service implements SensorEventListener {
 		case Sensor.TYPE_GRAVITY:
 			s = "3";
 			break;
+		case Sensor.TYPE_PROXIMITY:
+			s = "4";
+			break;
+		case Sensor.TYPE_LIGHT:
+			s = "5";
+			break;
+		default:
+			break;
 		}
 		if (startTimestamp == 0)
 			startTimestamp = event.timestamp;
@@ -158,6 +160,12 @@ public class DataService extends Service implements SensorEventListener {
 					break;
 				case 3:
 					sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+					break;
+				case 4:
+					sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+					break;
+				case 5:
+					sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 					break;
 				default:
 					break;

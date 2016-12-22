@@ -16,9 +16,9 @@ import android.widget.Button;
 public class MainActivity extends Activity implements View.OnClickListener{
 	
 	private Button startService, stopService;
-	private Button[] buttons = new Button[4];
+	private Button[] buttons = new Button[6];
 	
-	private boolean[] switches = new boolean[4];
+	private boolean[] switches = new boolean[6];
 	private DataService.MyBinder binder;
 	
 	private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -40,6 +40,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		buttons[1] = (Button) findViewById(R.id.Button1);
 		buttons[2] = (Button) findViewById(R.id.Button2);
 		buttons[3] = (Button) findViewById(R.id.Button3);
+		buttons[4] = (Button) findViewById(R.id.Button4);
+		buttons[5] = (Button) findViewById(R.id.Button5);
 		
 		startService.setOnClickListener(this);
 		stopService.setOnClickListener(this);
@@ -125,6 +127,20 @@ public class MainActivity extends Activity implements View.OnClickListener{
 				buttons[3].setText("重力：开");
 			else
 				buttons[3].setText("重力：关");
+			break;
+		case R.id.Button4:
+			switches[4] ^= true;
+			if (switches[4])
+				buttons[4].setText("临近距离：开");
+			else
+				buttons[4].setText("临近距离：关");
+			break;
+		case R.id.Button5:
+			switches[5] ^= true;
+			if (switches[5])
+				buttons[5].setText("光传感器：开");
+			else
+				buttons[5].setText("光传感器：关");
 			break;
 		default:
 			break;

@@ -27,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/Button4"
         android:layout_below="@+id/stopService"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -36,17 +37,20 @@
         android:id="@+id/Button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/Button0"
-        android:layout_marginRight="16dp"
+        android:layout_alignLeft="@+id/Button5"
+        android:layout_alignRight="@+id/Button5"
+        android:layout_above="@+id/Button3"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="16dp"
         android:text="陀螺仪：开" />
 
     <Button
         android:id="@+id/Button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Button0"
-        android:layout_alignRight="@+id/Button0"
+        android:layout_alignLeft="@+id/Button4"
+        android:layout_alignRight="@+id/Button4"
+        android:layout_below="@+id/Button0"
         android:layout_marginTop="16dp"
         android:layout_centerVertical="true"
         android:text="磁场：开" />
@@ -55,9 +59,30 @@
         android:id="@+id/Button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Button1"
-        android:layout_alignRight="@+id/Button1"
+        android:layout_alignLeft="@+id/Button5"
+        android:layout_alignRight="@+id/Button5"
+        android:layout_above="@+id/Button5"
         android:layout_centerVertical="true"
+        android:layout_marginBottom="16dp"
         android:text="重力：开" />
+    
+    <Button
+        android:id="@+id/Button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Button2"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_centerVertical="true"
+        android:text="临近距离：开" />
+
+    <Button
+        android:id="@+id/Button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/Button4"
+        android:layout_marginRight="16dp"
+        android:text="光传感器：开" />
 
 </RelativeLayout>
