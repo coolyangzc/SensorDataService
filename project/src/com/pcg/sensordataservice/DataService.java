@@ -46,7 +46,6 @@ public class DataService extends Service implements SensorEventListener {
 			fileName =format.format(new Date()) + ".txt";
 			path = new File(pathName);
 			file = new File(pathName + fileName);
-			Log.d("File", pathName + format.format(new Date()) + ".txt");
 			if (!path.exists())
 				path.mkdir();
 			if (!file.exists())
@@ -59,15 +58,12 @@ public class DataService extends Service implements SensorEventListener {
 			e.printStackTrace();
 		}
 		
-		Intent notificationIntent = new Intent(this, MainActivity.class);
-		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 		Notification.Builder builder = new Notification.Builder(this);
 		builder.setContentTitle("SensorDataService");
 		builder.setContentText("Recording " + pathName + fileName + "...");
 		builder.setSmallIcon(R.drawable.ic_launcher);
-		builder.setContentIntent(pendingIntent);
 		Notification notification = builder.build();
-		startForeground(1, notification);
+		startForeground(36, notification);
 	}
 	
 	@Override
