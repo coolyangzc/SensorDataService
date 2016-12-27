@@ -51,9 +51,6 @@ public class DataService extends Service implements SensorEventListener {
 			if (!file.exists())
 				file.createNewFile();
 				fos = new FileOutputStream(file);
-				String s = Long.toString(System.currentTimeMillis()) + "\n";
-				s += Long.toString(SystemClock.elapsedRealtimeNanos()) + "\n";
-				fos.write(s.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -108,8 +105,17 @@ public class DataService extends Service implements SensorEventListener {
 		default:
 			break;
 		}
-		if (startTimestamp == 0)
+		if (startTimestamp == 0) {
 			startTimestamp = event.timestamp;
+			String ss = Long.toString(System.currentTimeMillis()) + "\n";
+			ss += Long.toString(SystemClock.elapsedRealtimeNanos()) + "\n";
+			try {
+				fos.write(ss.getBytes());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		s += " " + Long.toString((event.timestamp - startTimestamp) / 1000000);
 		s += " " + Integer.toString(event.accuracy);
 		for (int i=0; i < event.values.length; ++i)	
