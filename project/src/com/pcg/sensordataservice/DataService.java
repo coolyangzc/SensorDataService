@@ -101,6 +101,12 @@ public class DataService extends Service implements SensorEventListener {
 		case Sensor.TYPE_LIGHT:
 			s = "5";
 			break;
+		case Sensor.TYPE_ROTATION_VECTOR:
+			s = "6";
+			break;
+		case Sensor.TYPE_LINEAR_ACCELERATION:
+			s = "7";
+			break;
 		default:
 			break;
 		}
@@ -169,6 +175,12 @@ public class DataService extends Service implements SensorEventListener {
 					break;
 				case 5:
 					sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+					break;
+				case 6:
+					sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+					break;
+				case 7:
+					sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
 					break;
 				default:
 					break;

@@ -84,5 +84,28 @@
         android:layout_alignTop="@+id/Button4"
         android:layout_marginRight="16dp"
         android:text="光传感器：开" />
+   	
+    <Button
+        android:id="@+id/Button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Button4"
+        android:layout_alignRight="@+id/Button4"
+        android:layout_below="@+id/Button4"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
+        android:text="旋转向量：开" />
+    
+    <Button
+        android:id="@+id/Button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Button5"
+        android:layout_alignRight="@+id/Button5"
+        android:layout_below="@+id/Button5"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
+        android:text="线性加速：开" />
+    
 
 </RelativeLayout>
