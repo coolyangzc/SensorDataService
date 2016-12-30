@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -57,7 +56,7 @@ public class DataService extends Service implements SensorEventListener {
 		
 		Notification.Builder builder = new Notification.Builder(this);
 		builder.setContentTitle("SensorDataService");
-		builder.setContentText("Recording " + pathName + fileName + "...");
+		builder.setContentText("Recording " + fileName + "...");
 		builder.setSmallIcon(R.drawable.ic_launcher);
 		Notification notification = builder.build();
 		startForeground(36, notification);
