@@ -41,14 +41,14 @@
 以下每行为一个传感器数据`(Sensorevent)`：
 
 * 第一列表示传感器类型
-	* 0: TYPE_ACCELEROMETER
-	* 1: TYPE_GYROSCOPE
-	* 2: TYPE\_MAGNETIC\_FIELD
-	* 3: TYPE_GRAVITY
-	* 4: TYPE_PROXIMITY
-	* 5: TYPE_LIGHT
-	* 6: TYPE_ROTATION_VECTOR
-	* 7: TYPE_LINEAR_ACCELERATION
+	* 0: TYPE_ACCELEROMETER `(3路数据)`
+	* 1: TYPE_GYROSCOPE `(3路数据)`
+	* 2: TYPE\_MAGNETIC\_FIELD `(3路数据)`
+	* 3: TYPE_GRAVITY `(3路数据)`
+	* 4: TYPE_PROXIMITY `(1路数据)`
+	* 5: TYPE_LIGHT  `(1路数据)`
+	* 6: TYPE\_ROTATION\_VECTOR `(5路数据)`
+	* 7: TYPE\_LINEAR\_ACCELERATION  `(3路数据)`
 	* 待添加，如有需求请提出
 * 第二列为该条数据距数据开始收集的时间，单位`ms`（不同传感器间不保证时间序）。
 * 第三列为该`Sensorevent`的`accuracy`

@@ -128,7 +128,7 @@ public class DataService extends Service implements SensorEventListener {
 		s += "\n";
 		byte [] buffer = s.getBytes();
 		try {
-			fos.write(buffer);
+			fos.writxe(buffer);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
